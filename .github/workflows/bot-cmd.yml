@@ -1,0 +1,16 @@
+name: bot-command-test
+on:
+  pull_request:
+    types: [opened]
+jobs:
+  botcmd:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: bot issues command
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body "Automated triage ping: @coderabbitai review"
