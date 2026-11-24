@@ -1,0 +1,14 @@
+name: bot-about
+on:
+  workflow_dispatch:
+jobs:
+  about:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: bot issues about
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: 3
+        run: gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body "@coderabbitai about"
